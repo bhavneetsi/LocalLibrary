@@ -32,6 +32,9 @@ urlpatterns += [
     path('accounts/', include('django.contrib.auth.urls')),
 ]
 
-urlpatterns += [
-    path('accounts/logout', auth_views.LogoutView.as_view(template_name='registration/logged_out.html')),
+
+
+urlpatterns += [   
+    path('mybooks/', views.LoanedBooksByUserListView.as_view(), name='my-borrowed'),
+     path('allborrowed/', views.AllLoanedBooksListView.as_view(), name='all-borrowed'),
 ]
