@@ -1,6 +1,7 @@
 from django.db import models
 from datetime import date
 from django.urls import reverse
+
 # Create your models here.
 
 class Genre(models.Model):
@@ -58,7 +59,7 @@ class Book(models.Model):
 		Returns the url to access a particular book instance.
 		"""
 		return reverse('book-details', args=[str(self.id)])
-
+    
 	def __str__(self):
 		"""
 		String for representing the Model object.
