@@ -1,6 +1,6 @@
-from django import froms
+from django import forms
 from django.core.exceptions import ValidationError
-from django.utils.traslation import ugettext_lazy as _
+from django.utils.translation import ugettext_lazy as _
 import datetime
 
 class RenewBookForm(forms.Form):
@@ -18,7 +18,7 @@ class RenewBookForm(forms.Form):
 
         # check if renewal date is more than 4 weeks
 
-        if data > datetime.date.today +  datetime.timedelta(weeks=4):
+        if data > datetime.date.today() +  datetime.timedelta(weeks=4) :
             raise ValidationError(_('Invalid date - renewal more than 4 weeks ahead'))
 
         
