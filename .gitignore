@@ -45,3 +45,9 @@ coverage.xml
 
 # Django stuff:
 *.log
+
+# Text backup files
+*.bak
+
+#Database
+*.sqlite3
