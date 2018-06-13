@@ -21,6 +21,7 @@ class Author(models.Model):
 	date_of_birth=models.DateField(null=True,blank=True)
 	date_of_death=models.DateField(null=True,blank=True)
 	
+	
 	class Meta:
 		ordering = ["last_name","first_name"]
 	
