@@ -1,6 +1,7 @@
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
+Python
 
 # C extensions
 *.so
@@ -44,3 +45,9 @@ coverage.xml
 
 # Django stuff:
 *.log
+
+# Text backup files
+*.bak
+
+#Database
+*.sqlite3

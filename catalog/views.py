@@ -27,7 +27,7 @@ class BookDetailView(generic.DetailView):
 
 class AuthorListView(generic.ListView):
     model=Author
-
+    paginate_by = 10
 class AuthorDetailView(generic.DetailView):
     model=Author        
 
@@ -53,7 +53,7 @@ class AllLoanedBooksListView(LoginRequiredMixin,generic.ListView,PermissionRequi
 
 # view to handle form data for renew
 from django.contrib.auth.decorators import permission_required
-from django.http import HttpResponseRedirect,JsonResponse
+from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.shortcuts import get_object_or_404
 from .forms import RenewBookForm
@@ -104,8 +104,22 @@ class AuthorDelete(DeleteView):
     model = Author
     success_url = reverse_lazy('authors')        
 
+
+class BookCreate(CreateView):
+    model = Book
+    fields = '__all__'
+
+class BookUpdate(UpdateView):
+    model=Book
+    fields= '__all__'     
+
+class BookDelete(DeleteView):
+    model=Book
+    success_url=reverse_lazy('books')       
+
 from catalog.serializers import CatlogSerializer
 from rest_framework.parsers import JSONParser
+from django.http import JsonResponse
 
 def book_list_api(request):
 
@@ -125,3 +139,4 @@ def book_list_api(request):
             return JsonResponse(serializer.data, status=201)
 
         return JsonResponse(serializer.errors, status=400)    
+    
