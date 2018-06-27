@@ -48,3 +48,7 @@ urlpatterns += [
     path('author/<int:pk>/update/', views.AuthorUpdate.as_view(), name='author_update'),
     path('author/<int:pk>/delete/', views.AuthorDelete.as_view(), name='author_delete'),
 ]
+
+urlpatterns += [
+    path('books/api',views.book_list_api,name='book_api'),
+]  

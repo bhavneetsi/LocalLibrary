@@ -53,7 +53,7 @@ class AllLoanedBooksListView(LoginRequiredMixin,generic.ListView,PermissionRequi
 
 # view to handle form data for renew
 from django.contrib.auth.decorators import permission_required
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect,JsonResponse
 from django.urls import reverse
 from django.shortcuts import get_object_or_404
 from .forms import RenewBookForm
@@ -103,3 +103,25 @@ class AuthorUpdate(UpdateView):
 class AuthorDelete(DeleteView):
     model = Author
     success_url = reverse_lazy('authors')        
+
+from catalog.serializers import CatlogSerializer
+from rest_framework.parsers import JSONParser
+
+def book_list_api(request):
+
+    if request.method == 'GET':
+
+        bookinst=BookInstance.objects.all()
+        serializer = CatlogSerializer(bookinst,many=True)
+        return JsonResponse(serializer.data,safe=False)
+
+
+    elif request.method == 'POST':
+        data = JSONParser().parse(request)
+
+        serializer=CatlogSerializer(data=data)
+        if(serializer.is_valid()):
+            serializer.save()
+            return JsonResponse(serializer.data, status=201)
+
+        return JsonResponse(serializer.errors, status=400)    
