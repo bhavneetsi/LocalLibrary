@@ -127,7 +127,7 @@ def book_list_api(request):
 
         bookinst=BookInstance.objects.all()
         serializer = CatlogSerializer(bookinst,many=True)
-        return JsonResponse(serializer.data,safe=False)
+        return JsonResponse(serializer.data,safe=False)     
 
 
     elif request.method == 'POST':
